@@ -1,7 +1,11 @@
-import { useFruits } from '../hooks/useFruits.ts'
+import { useBridges } from '../hooks/useBridges.ts'
 
 function App() {
-  const { data } = useFruits()
+  const { data } = useBridges()
+
+  if (!data) {
+    return <div>Loading...</div>
+  }
 
   return (
     <>
@@ -9,7 +13,11 @@ function App() {
         <h1 className="text-3xl font-bold underline">
           Fullstack Boilerplate - with Fruits!
         </h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+        <ul>
+          {data.map((bridge: { id: number; name: string }, i: number) => (
+            <p key={i}>{bridge.name}</p>
+          ))}
+        </ul>
       </div>
     </>
   )
