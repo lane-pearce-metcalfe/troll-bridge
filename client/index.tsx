@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * TODO: replace domain, clientId, and audience
      */
     <Auth0Provider
-      domain=""
-      clientId=""
+      domain="piwakawaka-25-lane.au.auth0.com"
+      clientId="daMAlsR05Q6IMru8tCrJixysPwnOEqPq"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'https://troll-toll-calculator/api',
       }}
     >
       <QueryClientProvider client={queryClient}>
