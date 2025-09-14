@@ -1,7 +1,6 @@
 import express from 'express'
 import * as Path from 'node:path'
 
-import fruitRoutes from './routes/fruits.ts'
 import bridgeRoutes from './routes/bridges.ts'
 import userRoutes from './routes/users.ts'
 
@@ -9,7 +8,6 @@ const server = express()
 
 server.use(express.json())
 
-server.use('/api/v1/fruits', fruitRoutes)
 server.use('/api/v1/bridges', bridgeRoutes)
 server.use('/api/v1/users', userRoutes)
 
