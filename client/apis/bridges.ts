@@ -7,3 +7,9 @@ export function getBridges() {
     return res.body
   })
 }
+
+export function getBridgeFromId(id: number) {
+  return request.get(rootUrl + `/bridges/${id}`).then((res) => {
+    return res.body
+  })
+}

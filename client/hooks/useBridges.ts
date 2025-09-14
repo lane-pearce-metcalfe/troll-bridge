@@ -1,7 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
-import { getBridges } from '../apis/bridges.ts'
+import { getBridges, getBridgeFromId } from '../apis/bridges.ts'
 
 export function useBridges() {
-  const query = useQuery({ queryKey: ['fruits'], queryFn: getBridges })
+  const query = useQuery({ queryKey: ['bridges'], queryFn: getBridges })
+  return query
+}
+
+export function useGetBridgeFromId(id: number) {
+  const query = useQuery({
+    queryKey: ['bridge', id],
+    queryFn: () => getBridgeFromId(id),
+  })
   return query
 }

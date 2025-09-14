@@ -17,4 +17,20 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  try {
+    const bridge = await db.getBridgeById(id)
+    if (!bridge) {
+      return res.status(404).json({ message: 'Bridge not found' })
+    }
+    res.json(bridge)
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ message: 'Something went wrong grabbing bridge by id' })
+  }
+})
+
 export default router
