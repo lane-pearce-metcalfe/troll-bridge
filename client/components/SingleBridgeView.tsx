@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useGetBridgeFromId } from '../hooks/useBridges'
+import Header from './Header'
 
 export default function SingleBridgeView() {
   const id = useParams().id
@@ -20,6 +21,7 @@ export default function SingleBridgeView() {
 
   return (
     <div>
+      <Header />
       <h2 className="text-2xl font-bold">{data.name}</h2>
     </div>
   )
