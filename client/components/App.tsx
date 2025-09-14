@@ -12,9 +12,6 @@ function App() {
     <>
       <div className="app">
         <Header />
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
         <ul>
           {data.map((bridge: { id: number; name: string }, i: number) => (
             <p key={i}>{bridge.name}</p>
