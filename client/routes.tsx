@@ -6,7 +6,7 @@ import BridgeForm from './components/AddBridge.tsx'
 export default createRoutesFromElements(
   <>
     <Route index element={<App />} />
-    <Route path="/bridges/:id" element={<SingleBridgeView />} />
+    <Route path="/bridge/:id" element={<SingleBridgeView />} />
     <Route path="/registerUser" element={<RegisterUser />} />
     <Route path="/addBridge" element={<BridgeForm />} />
   </>,
