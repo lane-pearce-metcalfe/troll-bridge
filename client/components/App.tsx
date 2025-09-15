@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useBridges } from '../hooks/useBridges.ts'
 import Header from './Header.tsx'
+import '../styles/bridgeList.css'
 
 function App() {
   const { data } = useBridges()
@@ -13,6 +14,7 @@ function App() {
     <>
       <div className="app">
         <Header />
+        <h1>List of bridges</h1>
         <ul>
           {data.map((bridge: { id: number; name: string }) => (
             <Link to={`/bridge/${bridge.id}`} key={bridge.id}>

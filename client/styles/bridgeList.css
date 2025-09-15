@@ -1,0 +1,27 @@
+ul {
+  list-style-type: disc; /* bullet style: disc | circle | square | none */
+  padding-left: 1.5rem; /* space before bullets */
+  margin: 1rem 0; /* space above/below the list */
+}
+
+ul p {
+  margin-bottom: 0.5rem; /* spacing between list items */
+  line-height: 1.5; /* improve readability */
+  font-size: 1.2rem;
+  color: #333;
+}
+
+ul p:hover {
+  color: black; /* change color on hover */
+  font-weight: bold;
+  cursor: pointer; /* indicate it's clickable */
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #222;
+  font-weight: bold;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
