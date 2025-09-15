@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useGetBridgeFromId } from '../hooks/useBridges'
 import Header from './Header'
+import '../styles/singleBridgeView.css'
 
 export default function SingleBridgeView() {
   const id = useParams().id
@@ -8,27 +9,53 @@ export default function SingleBridgeView() {
   const { data, isLoading, isError } = useGetBridgeFromId(Number(id))
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        Loading...
+      </div>
+    )
   }
 
   if (isError) {
-    return <div>Error loading bridge</div>
+    return <div className="error-container">Error loading bridge</div>
   }
 
   if (!data) {
-    return <div>No bridge found</div>
+    return <div className="not-found-container">No bridge found</div>
   }
 
   return (
-    <div>
+    <>
       <Header />
-      <h2 className="text-2xl font-bold">{data.name}</h2>
-      <img src={data.img_url} alt={data.name} />
-      <p>Location: {data.location}</p>
-      <p>Type: {data.type}</p>
-      <p>Length: {data.length} meters</p>
-      <p>Height: {data.height} meters</p>
-      <p>Year Built: {data.year_built}</p>
-    </div>
+      <div className="single-bridge-container">
+        <div className="bridge-content">
+          <h2 className="bridge-title">{data.name}</h2>
+          <img src={data.img_url} alt={data.name} className="bridge-image" />
+          <div className="bridge-details">
+            <div className="bridge-detail-item">
+              <span className="detail-label">Location:</span>
+              <span className="detail-value">{data.location}</span>
+            </div>
+            <div className="bridge-detail-item">
+              <span className="detail-label">Type:</span>
+              <span className="detail-value">{data.type}</span>
+            </div>
+            <div className="bridge-detail-item">
+              <span className="detail-label">Length:</span>
+              <span className="detail-value">{data.length} meters</span>
+            </div>
+            <div className="bridge-detail-item">
+              <span className="detail-label">Height:</span>
+              <span className="detail-value">{data.height} meters</span>
+            </div>
+            <div className="bridge-detail-item">
+              <span className="detail-label">Year Built:</span>
+              <span className="detail-value">{data.year_built}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
