@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAddBridge } from '../hooks/useBridges'
 import { AddBridgeData } from '../../models/bridges'
 import { useAuth0 } from '@auth0/auth0-react'
+import Header from './Header'
 
 export default function BridgeForm() {
   const { user } = useAuth0()
@@ -45,79 +46,82 @@ export default function BridgeForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add a New Bridge</h2>
+    <>
+      <Header />
+      <form onSubmit={handleSubmit}>
+        <h2>Add a New Bridge</h2>
 
-      <p>Bridge name:</p>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-      <p>Location:</p>
-      <input
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-        required
-      />
-      <p>Type of bridge:</p>
-      <input
-        type="text"
-        name="type"
-        value={formData.type}
-        onChange={handleChange}
-      />
-      <p>Length in meters:</p>
-      <input
-        type="number"
-        name="length"
-        value={formData.length}
-        onChange={handleChange}
-      />
-      <p>Height in meters:</p>
-      <input
-        type="number"
-        name="height"
-        value={formData.height}
-        onChange={handleChange}
-      />
-      <p>Year built:</p>
-      <input
-        type="number"
-        name="year_built"
-        value={formData.year_built}
-        onChange={handleChange}
-      />
-      <p>Latitude:</p>
-      <input
-        type="number"
-        step="any"
-        name="lat"
-        placeholder="Latitude"
-        value={formData.lat}
-        onChange={handleChange}
-      />
-      <p>Longitude:</p>
-      <input
-        type="number"
-        name="lng"
-        placeholder="Longitude"
-        value={formData.lng}
-        onChange={handleChange}
-      />
-      <p>Img url:</p>
-      <input
-        type="url"
-        name="img_url"
-        value={formData.img_url}
-        onChange={handleChange}
-      />
+        <p>Bridge name:</p>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <p>Location:</p>
+        <input
+          type="text"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
+        <p>Type of bridge:</p>
+        <input
+          type="text"
+          name="type"
+          value={formData.type}
+          onChange={handleChange}
+        />
+        <p>Length in meters:</p>
+        <input
+          type="number"
+          name="length"
+          value={formData.length}
+          onChange={handleChange}
+        />
+        <p>Height in meters:</p>
+        <input
+          type="number"
+          name="height"
+          value={formData.height}
+          onChange={handleChange}
+        />
+        <p>Year built:</p>
+        <input
+          type="number"
+          name="year_built"
+          value={formData.year_built}
+          onChange={handleChange}
+        />
+        <p>Latitude:</p>
+        <input
+          type="number"
+          step="any"
+          name="lat"
+          placeholder="Latitude"
+          value={formData.lat}
+          onChange={handleChange}
+        />
+        <p>Longitude:</p>
+        <input
+          type="number"
+          name="lng"
+          placeholder="Longitude"
+          value={formData.lng}
+          onChange={handleChange}
+        />
+        <p>Img url:</p>
+        <input
+          type="url"
+          name="img_url"
+          value={formData.img_url}
+          onChange={handleChange}
+        />
 
-      <button type="submit">Add bridge</button>
-    </form>
+        <button type="submit">Add bridge</button>
+      </form>
+    </>
   )
 }
