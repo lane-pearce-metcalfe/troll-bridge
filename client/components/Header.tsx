@@ -12,21 +12,29 @@ export default function Header() {
   function handleLogout() {
     logout()
   }
+
   return (
     <header>
-      <>
+      <div className="header-auth">
         {!user ? (
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleLogin} className="header-btn login-btn">
+            Login
+          </button>
         ) : (
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="header-btn logout-btn">
+            Logout
+          </button>
         )}
-      </>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      <Link to="/addBridge">
-        <button>Add Bridge</button>
-      </Link>
+      </div>
+
+      <nav className="header-nav">
+        <Link to="/" className="header-link">
+          <button className="header-btn home-btn">Home</button>
+        </Link>
+        <Link to="/addBridge" className="header-link">
+          <button className="header-btn add-bridge-btn">Add Bridge</button>
+        </Link>
+      </nav>
     </header>
   )
 }
