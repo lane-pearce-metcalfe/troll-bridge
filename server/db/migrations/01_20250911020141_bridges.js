@@ -19,7 +19,7 @@ export async function up(knex) {
       .onDelete('SET NULL')
     table.integer('lat')
     table.integer('lng')
-    table.string('image_url')
+    table.string('img_url')
   })
 }
 
