@@ -5,7 +5,7 @@ export interface AddBridgeData {
   length: number
   height: number
   year_built: number
-  added_by: string
+  added_by: string | undefined
   troll_owner: string | null
   lat: number
   lng: number
