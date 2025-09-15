@@ -1,4 +1,4 @@
-export interface Bridge {
+export interface BridgeData {
   id: number
   name: string
   location: string
