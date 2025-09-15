@@ -33,4 +33,15 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  const bridgeData = req.body
+  try {
+    const bridgeId = await db.addBridge(bridgeData)
+    res.status(201).json({ id: bridgeId })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Something went wrong adding a bridge' })
+  }
+})
+
 export default router
