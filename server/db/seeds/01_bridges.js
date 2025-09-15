@@ -14,7 +14,7 @@ export async function seed(knex) {
       troll_owner: null,
       lat: -36.83084262833497,
       lng: 174.74537693805735,
-      image_url:
+      img_url:
         'https://www.wsp.com/-/media/project/new-zealand/images/portrait-and-landscape/img-auckland-harbour-bridge.jpg?h=650&iar=0&w=1300&hash=227353A18E8E8E2AAE18A4ACB207ECB0',
     },
     {
@@ -29,7 +29,7 @@ export async function seed(knex) {
       troll_owner: null,
       lat: -36.93356484322265,
       lng: 174.78821052136408,
-      image_url:
+      img_url:
         'https://media.rnztools.nz/rnz/image/upload/s--jiqjqcH7--/ar_16:10,c_fill,f_auto,g_auto,q_auto,w_1050/v1661393135/4LN581C_Mangerebridge_jpg?_a=BACCd2AD',
     },
     {
@@ -44,7 +44,7 @@ export async function seed(knex) {
       troll_owner: null,
       lat: -36.84120909657493,
       lng: 174.75965852267197,
-      image_url:
+      img_url:
         'https://upload.wikimedia.org/wikipedia/commons/3/35/Wynyard_Crossing%2C_bridge_in_Wynyard_Quarter%2C_Auckland..jpg',
     },
   ])
