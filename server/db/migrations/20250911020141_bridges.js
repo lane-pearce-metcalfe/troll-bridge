@@ -7,8 +7,8 @@ export async function up(knex) {
     table.string('name')
     table.string('location')
     table.string('type')
-    table.integer('length')
-    table.integer('height')
+    table.integer('length') // length in meters
+    table.integer('height') // height in meters
     table.integer('year_built')
     table.string('added_by')
     table.foreign('added_by').references('users.id').onDelete('SET NULL')
