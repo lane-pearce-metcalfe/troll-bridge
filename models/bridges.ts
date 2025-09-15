@@ -1,5 +1,4 @@
-export interface BridgeData {
-  id: number
+export interface AddBridgeData {
   name: string
   location: string
   type: string
@@ -11,4 +10,8 @@ export interface BridgeData {
   lat: number
   lng: number
   img_url: string
+}
+
+export interface BridgeData extends AddBridgeData {
+  id: number
 }

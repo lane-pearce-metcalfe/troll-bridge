@@ -1,5 +1,5 @@
 import * as request from 'superagent'
-import { BridgeData } from '../../models/bridges'
+import { AddBridgeData } from '../../models/bridges'
 
 const rootUrl = '/api/v1'
 
@@ -15,7 +15,7 @@ export function getBridgeFromId(id: number) {
   })
 }
 
-export function addBridge(bridge: BridgeData) {
+export function addBridge(bridge: AddBridgeData) {
   return request
     .post(rootUrl + '/bridges')
     .send(bridge)

@@ -1,4 +1,4 @@
-import { BridgeData } from '../../models/bridges.ts'
+import { AddBridgeData } from '../../models/bridges.ts'
 import db from './connection.ts'
 
 export async function getAllBridges() {
@@ -11,7 +11,7 @@ export async function getBridgeById(id: number) {
   return bridge
 }
 
-export async function addBridge(bridge: BridgeData) {
+export async function addBridge(bridge: AddBridgeData) {
   const bridgeId = await db('bridges').insert(bridge).returning('id')
   return bridgeId
 }

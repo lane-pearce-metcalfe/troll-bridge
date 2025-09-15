@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getBridges, getBridgeFromId, addBridge } from '../apis/bridges.ts'
-import { BridgeData } from '../../models/bridges.ts'
+import { AddBridgeData } from '../../models/bridges.ts'
 
 export function useBridges() {
   const query = useQuery({ queryKey: ['bridges'], queryFn: getBridges })
@@ -18,7 +18,7 @@ export function useGetBridgeFromId(id: number) {
 export function useAddBridge() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (newBridge: BridgeData) => addBridge(newBridge),
+    mutationFn: (newBridge: AddBridgeData) => addBridge(newBridge),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bridges'] })
     },
