@@ -23,6 +23,12 @@ export default function SingleBridgeView() {
     <div>
       <Header />
       <h2 className="text-2xl font-bold">{data.name}</h2>
+      <img src={data.img_url} alt={data.name} />
+      <p>Location: {data.location}</p>
+      <p>Type: {data.type}</p>
+      <p>Length: {data.length} meters</p>
+      <p>Height: {data.height} meters</p>
+      <p>Year Built: {data.year_built}</p>
     </div>
   )
 }
