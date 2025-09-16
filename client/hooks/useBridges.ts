@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getBridges, getBridgeFromId, addBridge } from '../apis/bridges.ts'
+import {
+  getBridges,
+  getBridgeFromId,
+  addBridge,
+  takeoverBridge,
+} from '../apis/bridges.ts'
 import { AddBridgeData } from '../../models/bridges.ts'
 
 export function useBridges() {
@@ -13,6 +18,25 @@ export function useGetBridgeFromId(id: number) {
     queryFn: () => getBridgeFromId(id),
   })
   return query
+}
+
+export function useTakeoverBridge() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      bridgeId,
+      userSub,
+    }: {
+      bridgeId: number
+      userSub: string
+    }) => takeoverBridge(bridgeId, userSub),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['bridges'] })
+      queryClient.invalidateQueries({
+        queryKey: ['bridge', variables.bridgeId],
+      })
+    },
+  })
 }
 
 export function useAddBridge() {
