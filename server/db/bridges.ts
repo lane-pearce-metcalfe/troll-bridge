@@ -25,3 +25,13 @@ export async function takeoverBridge(id: number, userSub: string) {
     return false
   }
 }
+
+export async function releaseBridge(id: number, userSub: string) {
+  const bridge = await db('bridges').where({ id }).first()
+  if (bridge.troll_owner === userSub) {
+    await db('bridges').where({ id }).update({ troll_owner: null })
+    return true
+  } else {
+    return false
+  }
+}
