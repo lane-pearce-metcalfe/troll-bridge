@@ -4,6 +4,7 @@ import {
   getBridgeFromId,
   addBridge,
   takeoverBridge,
+  releaseBridge,
 } from '../apis/bridges.ts'
 import { AddBridgeData } from '../../models/bridges.ts'
 
@@ -30,6 +31,25 @@ export function useTakeoverBridge() {
       bridgeId: number
       userSub: string
     }) => takeoverBridge(bridgeId, userSub),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['bridges'] })
+      queryClient.invalidateQueries({
+        queryKey: ['bridge', variables.bridgeId],
+      })
+    },
+  })
+}
+
+export function useReleaseBridge() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      bridgeId,
+      userSub,
+    }: {
+      bridgeId: number
+      userSub: string
+    }) => releaseBridge(bridgeId, userSub),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ['bridges'] })
       queryClient.invalidateQueries({
