@@ -23,6 +23,14 @@ export function takeoverBridge(bridgeId: number, userSub: string) {
     })
 }
 
+export function releaseBridge(bridgeId: number, userSub: string) {
+  return request
+    .post(rootUrl + `/bridges/release/${bridgeId}/${userSub}`)
+    .then((res) => {
+      return res.body
+    })
+}
+
 export function addBridge(bridge: AddBridgeData) {
   return request
     .post(rootUrl + '/bridges')
