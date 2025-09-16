@@ -63,4 +63,24 @@ router.post('/takeover/:bridgeId/:userSub', async (req, res) => {
       .json({ message: 'Something went wrong taking over the bridge' })
   }
 })
+
+router.post('/release/:bridgeId/:userSub', async (req, res) => {
+  const bridgeId = Number(req.params.bridgeId)
+  const userSub = req.params.userSub
+  try {
+    const success = await db.releaseBridge(bridgeId, userSub)
+    if (success) {
+      res.json({ message: 'Bridge successfully released' })
+    } else {
+      res
+        .status(400)
+        .json({ message: 'You do not own this bridge to release it' })
+    }
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ message: 'Something went wrong releasing the bridge' })
+  }
+})
 export default router
