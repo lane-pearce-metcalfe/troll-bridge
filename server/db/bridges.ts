@@ -18,6 +18,9 @@ export async function addBridge(bridge: AddBridgeData) {
 
 export async function takeoverBridge(id: number, userSub: string) {
   const bridge = await db('bridges').where({ id }).first()
+  if (await checkIfUserOwnsAnyBridge(userSub)) {
+    return false
+  }
   if (bridge.troll_owner === null) {
     await db('bridges').where({ id }).update({ troll_owner: userSub })
     return true
@@ -34,4 +37,9 @@ export async function releaseBridge(id: number, userSub: string) {
   } else {
     return false
   }
+}
+
+export async function checkIfUserOwnsAnyBridge(userSub: string) {
+  const bridge = await db('bridges').where({ troll_owner: userSub }).first()
+  return !!bridge
 }
