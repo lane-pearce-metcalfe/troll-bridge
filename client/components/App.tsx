@@ -1,10 +1,31 @@
 import { Link } from 'react-router-dom'
-import { useBridges } from '../hooks/useBridges.ts'
+import {
+  useBridges,
+  useReleaseBridge,
+  useTakeoverBridge,
+} from '../hooks/useBridges.ts'
 import Header from './Header.tsx'
 import '../styles/bridgeList.css'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function App() {
+  const { user, isAuthenticated } = useAuth0()
   const { data } = useBridges()
+
+  const takeoverBridge = useTakeoverBridge()
+  const releaseBridge = useReleaseBridge()
+
+  function handleTakeover(bridgeId: number) {
+    if (user && user.sub && isAuthenticated) {
+      takeoverBridge.mutate({ bridgeId, userSub: user.sub })
+    }
+  }
+
+  function handleRelease(bridgeId: number) {
+    if (user && user.sub && isAuthenticated) {
+      releaseBridge.mutate({ bridgeId, userSub: user.sub })
+    }
+  }
 
   if (!data) {
     return (
@@ -39,28 +60,46 @@ function App() {
       <Header />
       <div className="app-content">
         <h1 className="bridges-title">List of Bridges</h1>
-        
-        {/* Table-like header */}
+
         <div className="bridges-header">
           <div>Name</div>
           <div>Occupancy</div>
         </div>
-        
+
         <ul className="bridges-list">
-          {data.map((bridge: { id: number; name: string; occupied?: boolean }) => (
-            <li key={bridge.id}>
-              <Link to={`/bridge/${bridge.id}`} className="bridge-item-link">
+          {data.map(
+            (bridge: { id: number; name: string; troll_owner?: boolean }) => (
+              <li key={bridge.id}>
                 <div className="bridge-item">
-                  <p className="bridge-name">{bridge.name}</p>
-                  <span className={`bridge-occupancy ${
-                    bridge.occupied ? 'occupancy-occupied' : 'occupancy-vacant'
-                  }`}>
-                    {bridge.occupied ? 'Occupied' : 'Vacant'}
+                  <Link
+                    to={`/bridge/${bridge.id}`}
+                    className="bridge-item-link"
+                  >
+                    <p className="bridge-name">{bridge.name}</p>
+                  </Link>
+                  <span
+                    className={`bridge-occupancy ${
+                      bridge.troll_owner
+                        ? 'occupancy-occupied'
+                        : 'occupancy-vacant'
+                    }`}
+                  >
+                    {bridge.troll_owner === user?.sub ? (
+                      <button onClick={() => handleRelease(bridge.id)}>
+                        Release
+                      </button>
+                    ) : bridge.troll_owner ? (
+                      'Occupied'
+                    ) : (
+                      <button onClick={() => handleTakeover(bridge.id)}>
+                        Takeover
+                      </button>
+                    )}
                   </span>
                 </div>
-              </Link>
-            </li>
-          ))}
+              </li>
+            ),
+          )}
         </ul>
       </div>
     </div>

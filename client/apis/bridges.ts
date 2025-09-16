@@ -15,6 +15,22 @@ export function getBridgeFromId(id: number) {
   })
 }
 
+export function takeoverBridge(bridgeId: number, userSub: string) {
+  return request
+    .post(rootUrl + `/bridges/takeover/${bridgeId}/${userSub}`)
+    .then((res) => {
+      return res.body
+    })
+}
+
+export function releaseBridge(bridgeId: number, userSub: string) {
+  return request
+    .post(rootUrl + `/bridges/release/${bridgeId}/${userSub}`)
+    .then((res) => {
+      return res.body
+    })
+}
+
 export function addBridge(bridge: AddBridgeData) {
   return request
     .post(rootUrl + '/bridges')
