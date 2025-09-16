@@ -70,30 +70,33 @@ function App() {
           {data.map(
             (bridge: { id: number; name: string; troll_owner?: boolean }) => (
               <li key={bridge.id}>
-                <Link to={`/bridge/${bridge.id}`} className="bridge-item-link">
-                  <div className="bridge-item">
+                <div className="bridge-item">
+                  <Link
+                    to={`/bridge/${bridge.id}`}
+                    className="bridge-item-link"
+                  >
                     <p className="bridge-name">{bridge.name}</p>
-                    <span
-                      className={`bridge-occupancy ${
-                        bridge.troll_owner
-                          ? 'occupancy-occupied'
-                          : 'occupancy-vacant'
-                      }`}
-                    >
-                      {bridge.troll_owner === user?.sub ? (
-                        <button onClick={() => handleRelease(bridge.id)}>
-                          Release
-                        </button>
-                      ) : bridge.troll_owner ? (
-                        'Occupied'
-                      ) : (
-                        <button onClick={() => handleTakeover(bridge.id)}>
-                          Takeover
-                        </button>
-                      )}
-                    </span>
-                  </div>
-                </Link>
+                  </Link>
+                  <span
+                    className={`bridge-occupancy ${
+                      bridge.troll_owner
+                        ? 'occupancy-occupied'
+                        : 'occupancy-vacant'
+                    }`}
+                  >
+                    {bridge.troll_owner === user?.sub ? (
+                      <button onClick={() => handleRelease(bridge.id)}>
+                        Release
+                      </button>
+                    ) : bridge.troll_owner ? (
+                      'Occupied'
+                    ) : (
+                      <button onClick={() => handleTakeover(bridge.id)}>
+                        Takeover
+                      </button>
+                    )}
+                  </span>
+                </div>
               </li>
             ),
           )}
