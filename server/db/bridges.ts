@@ -15,3 +15,13 @@ export async function addBridge(bridge: AddBridgeData) {
   const bridgeId = await db('bridges').insert(bridge).returning('id')
   return bridgeId
 }
+
+export async function takeoverBridge(id: number, userSub: string) {
+  const bridge = await db('bridges').where({ id }).first()
+  if (bridge.troll_owner === null) {
+    await db('bridges').where({ id }).update({ troll_owner: userSub })
+    return true
+  } else {
+    return false
+  }
+}
