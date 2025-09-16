@@ -9,20 +9,20 @@ import '../styles/bridgeList.css'
 import { useAuth0 } from '@auth0/auth0-react'
 
 function App() {
-  const { user } = useAuth0()
+  const { user, isAuthenticated } = useAuth0()
   const { data } = useBridges()
 
   const takeoverBridge = useTakeoverBridge()
   const releaseBridge = useReleaseBridge()
 
   function handleTakeover(bridgeId: number) {
-    if (user && user.sub) {
+    if (user && user.sub && isAuthenticated) {
       takeoverBridge.mutate({ bridgeId, userSub: user.sub })
     }
   }
 
   function handleRelease(bridgeId: number) {
-    if (user && user.sub) {
+    if (user && user.sub && isAuthenticated) {
       releaseBridge.mutate({ bridgeId, userSub: user.sub })
     }
   }
