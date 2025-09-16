@@ -1,7 +1,9 @@
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps'
 import { useBridges } from '../hooks/useBridges'
 import { BridgeData } from '../../models/bridges'
+import { useNavigate } from 'react-router-dom'
 export default function GoogleMap() {
+  const navigate = useNavigate()
   const { data } = useBridges()
 
   if (!data) {
@@ -18,6 +20,8 @@ export default function GoogleMap() {
       >
         {data.map((bridge: BridgeData, index: number) => (
           <AdvancedMarker
+            title={bridge.name}
+            onClick={() => navigate(`/bridge/${bridge.id}`)}
             position={{ lat: bridge.lat, lng: bridge.lng }}
             key={index}
           />
