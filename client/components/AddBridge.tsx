@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAddBridge } from '../hooks/useBridges'
 import { AddBridgeData } from '../../models/bridges'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -43,6 +43,14 @@ export default function BridgeForm() {
           : value,
     }))
   }
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      lat: markerPosition.lat,
+      lng: markerPosition.lng,
+    }))
+  }, [markerPosition])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
