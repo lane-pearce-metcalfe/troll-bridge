@@ -4,10 +4,15 @@ import { AddBridgeData } from '../../models/bridges'
 import { useAuth0 } from '@auth0/auth0-react'
 import Header from './Header'
 import '../styles/addBridge.css'
+import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps'
 
 export default function BridgeForm() {
   const { user } = useAuth0()
   const addBridgeMutation = useAddBridge()
+  const [markerPosition, setMarkerPosition] = useState<{
+    lat: number
+    lng: number
+  }>({ lat: -36.8485, lng: 174.7633 })
 
   const [formData, setFormData] = useState<AddBridgeData>({
     name: '',
@@ -18,8 +23,8 @@ export default function BridgeForm() {
     year_built: 0,
     added_by: user?.sub,
     troll_owner: null,
-    lat: 0,
-    lng: 0,
+    lat: markerPosition.lat,
+    lng: markerPosition.lng,
     img_url: '',
   })
 
@@ -33,8 +38,6 @@ export default function BridgeForm() {
         name === 'length' ||
         name === 'height' ||
         name === 'year_built' ||
-        name === 'lat' ||
-        name === 'lng' ||
         name === 'id'
           ? Number(value)
           : value,
@@ -162,38 +165,38 @@ export default function BridgeForm() {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label" htmlFor="lat">
-                Latitude
-              </label>
-              <input
-                id="lat"
-                type="number"
-                step="any"
-                name="lat"
-                value={formData.lat || ''}
-                onChange={handleChange}
-                className="form-input"
-                placeholder="-36.8485"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="lng">
-                Longitude
-              </label>
-              <input
-                id="lng"
-                type="number"
-                step="any"
-                name="lng"
-                value={formData.lng || ''}
-                onChange={handleChange}
-                className="form-input"
-                placeholder="174.7633"
-              />
-            </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="lat">
+              Click anywhere on the map to add the bridges coordinates
+            </label>
+            <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+              <Map
+                defaultZoom={10}
+                defaultCenter={{ lat: -36.8485, lng: 174.7633 }}
+                style={{ width: '100%', height: '400px' }}
+                mapId={import.meta.env.VITE_MAP_ID}
+                onClick={async (e) => {
+                  if (!e.detail.latLng) return
+                  const latDet = e.detail.latLng.lat
+                  const lngDet = e.detail.latLng.lng
+                  setMarkerPosition({ lat: latDet, lng: lngDet })
+                }}
+              >
+                <AdvancedMarker
+                  position={{
+                    lat: markerPosition.lat,
+                    lng: markerPosition.lng,
+                  }}
+                />
+              </Map>
+            </APIProvider>
+            <button
+              onClick={() => {
+                console.log(markerPosition)
+              }}
+            >
+              Test
+            </button>
           </div>
 
           <div className="form-group">
