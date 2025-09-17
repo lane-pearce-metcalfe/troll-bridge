@@ -7,6 +7,7 @@ import {
 import Header from './Header.tsx'
 import '../styles/bridgeList.css'
 import { useAuth0 } from '@auth0/auth0-react'
+import GoogleMap from './GoogleMap.tsx'
 
 function App() {
   const { user, isAuthenticated } = useAuth0()
@@ -102,6 +103,7 @@ function App() {
           )}
         </ul>
       </div>
+      <GoogleMap />
     </div>
   )
 }
