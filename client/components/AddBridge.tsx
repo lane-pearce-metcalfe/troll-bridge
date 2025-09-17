@@ -5,8 +5,10 @@ import { useAuth0 } from '@auth0/auth0-react'
 import Header from './Header'
 import '../styles/addBridge.css'
 import { AdvancedMarker, APIProvider, Map } from '@vis.gl/react-google-maps'
+import { useNavigate } from 'react-router-dom'
 
 export default function BridgeForm() {
+  const navigate = useNavigate()
   const { user } = useAuth0()
   const addBridgeMutation = useAddBridge()
   const [markerPosition, setMarkerPosition] = useState<{
@@ -55,6 +57,7 @@ export default function BridgeForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     addBridgeMutation.mutate(formData)
+    navigate('/')
   }
 
   return (
