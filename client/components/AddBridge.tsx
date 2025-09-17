@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function BridgeForm() {
   const navigate = useNavigate()
-  const { user } = useAuth0()
+  const { user, isAuthenticated } = useAuth0()
   const addBridgeMutation = useAddBridge()
   const [markerPosition, setMarkerPosition] = useState<{
     lat: number
@@ -58,6 +58,16 @@ export default function BridgeForm() {
     e.preventDefault()
     addBridgeMutation.mutate(formData)
     navigate('/')
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Header />
+        <h1>Please log in to add a bridge</h1>
+        <button onClick={() => navigate('/')}>Go Home</button>
+      </>
+    )
   }
 
   return (

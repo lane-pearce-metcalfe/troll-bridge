@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import '../styles/header.css'
 
 export default function Header() {
-  const { loginWithRedirect, logout, user } = useAuth0()
+  const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0()
 
   function handleLogin() {
     loginWithRedirect()
@@ -31,9 +31,11 @@ export default function Header() {
         <Link to="/" className="header-link">
           <button className="header-btn home-btn">Home</button>
         </Link>
-        <Link to="/addBridge" className="header-link">
-          <button className="header-btn add-bridge-btn">Add Bridge</button>
-        </Link>
+        {isAuthenticated ? (
+          <Link to="/addBridge" className="header-link">
+            <button className="header-btn add-bridge-btn">Add Bridge</button>
+          </Link>
+        ) : null}
       </nav>
     </header>
   )
